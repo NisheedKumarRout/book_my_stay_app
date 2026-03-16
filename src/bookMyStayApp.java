@@ -1,16 +1,6 @@
 import java.util.HashMap;
 
-/**
- * ============================================================
- * MAIN CLASS - UseCase4RoomSearch
- * ============================================================
- * Use Case 4: Room Search & Availability Check
- *
- * Demonstrates read-only access to centralized inventory.
- *
- * @author Developer
- * @version 4.0
- */
+
 
 abstract class Room {
 
