@@ -2,6 +2,7 @@ import java.util.HashMap;
 
 
 
+
 abstract class Room {
 
     protected String roomType;
@@ -43,6 +44,7 @@ class SuiteRoom extends Room {
 
 /* Inventory Management (from UC3) */
 
+
 class RoomInventory {
 
     private HashMap<String, Integer> inventory;
@@ -54,6 +56,10 @@ class RoomInventory {
         inventory.put("Single Room", 5);
         inventory.put("Double Room", 3);
         inventory.put("Suite Room", 0);   // Example unavailable room
+        // Initial room availability
+        inventory.put("Single Room", 5);
+        inventory.put("Double Room", 3);
+        inventory.put("Suite Room", 2);
     }
 
     public int getAvailability(String roomType) {
@@ -98,6 +104,23 @@ class RoomSearchService {
 }
 
 
+=======
+    public void updateAvailability(String roomType, int count) {
+
+        inventory.put(roomType, count);
+    }
+
+    public void displayInventory() {
+
+        System.out.println("\nCurrent Room Inventory:");
+
+        for (String roomType : inventory.keySet()) {
+
+            System.out.println(roomType + " : " + inventory.get(roomType));
+        }
+    }
+}
+
 public class bookMyStayApp {
 
     public static void main(String[] args) {
@@ -105,6 +128,9 @@ public class bookMyStayApp {
         System.out.println("=====================================");
         System.out.println("Book My Stay App - Version 4.0");
         System.out.println("Room Search & Availability Check");
+
+        System.out.println("Book My Stay App - Version 3.0");
+        System.out.println("Centralized Room Inventory");
         System.out.println("=====================================");
 
         RoomInventory inventory = new RoomInventory();
@@ -118,5 +144,16 @@ public class bookMyStayApp {
         RoomSearchService searchService = new RoomSearchService(inventory);
 
         searchService.searchAvailableRooms(rooms);
+
+        inventory.displayInventory();
+
+        System.out.println("\nChecking availability for Double Room:");
+        System.out.println("Available: " +
+                inventory.getAvailability("Double Room"));
+
+        System.out.println("\nUpdating Suite Room availability...");
+        inventory.updateAvailability("Suite Room", 4);
+
+        inventory.displayInventory();
     }
 }
