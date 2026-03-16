@@ -1,18 +1,4 @@
-/**
- * ============================================================
- * MAIN CLASS - UseCase2RoomInitialization
- * ============================================================
- * Use Case 2: Basic Room Types & Static Availability
- *
- * This program demonstrates:
- * - Abstraction using an abstract Room class
- * - Inheritance through different room types
- * - Polymorphism using Room references
- * - Static availability variables
- *
- * @author Developer
- * @version 2.0
- */
+
 
 abstract class Room {
 
