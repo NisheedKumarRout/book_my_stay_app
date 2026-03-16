@@ -59,7 +59,7 @@ class BookingRequestQueue {
 
 /* Main Application */
 
-public class UseCase5BookingRequestQueue {
+public class bookMyStayApp {
 
     public static void main(String[] args) {
 
