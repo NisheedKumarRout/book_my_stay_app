@@ -1,17 +1,6 @@
 import java.util.*;
 
-/*
- * ============================================================
- * Use Case 6: Reservation Confirmation & Room Allocation
- * ============================================================
- * Processes booking requests and safely allocates rooms
- * while preventing double-booking.
- *
- * @version 6.0
- */
 
-
-/* Reservation (booking request) */
 
 class Reservation {
 
