@@ -40,7 +40,7 @@ class AddOnServiceManager {
     }
 }
 
-public class Main {
+public class bookMyStayApp {
     public static void main(String[] args) {
         AddOnServiceManager manager = new AddOnServiceManager();
 
