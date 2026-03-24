@@ -1,80 +1,79 @@
 import java.util.*;
 
+class InvalidBookingException extends Exception {
+    public InvalidBookingException(String message) {
+        super(message);
+    }
+}
+
+class BookingValidator {
+    private static final List<String> validRoomTypes = Arrays.asList("Standard", "Deluxe", "Suite");
+
+    public static void validate(String roomType, int availableRooms) throws InvalidBookingException {
+        if (!validRoomTypes.contains(roomType)) {
+            throw new InvalidBookingException("Invalid room type: " + roomType);
+        }
+
+        if (availableRooms <= 0) {
+            throw new InvalidBookingException("No rooms available for booking");
+        }
+    }
+}
+
 class Reservation {
     private String reservationId;
-    private String guestName;
     private String roomType;
-    private double price;
 
-    public Reservation(String reservationId, String guestName, String roomType, double price) {
+    public Reservation(String reservationId, String roomType) {
         this.reservationId = reservationId;
-        this.guestName = guestName;
         this.roomType = roomType;
-        this.price = price;
     }
 
     public String getReservationId() {
         return reservationId;
     }
 
-    public String getGuestName() {
-        return guestName;
-    }
-
     public String getRoomType() {
         return roomType;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-}
-
-class BookingHistory {
-    private List<Reservation> reservations = new ArrayList<>();
-
-    public void addReservation(Reservation reservation) {
-        reservations.add(reservation);
-    }
-
-    public List<Reservation> getAllReservations() {
-        return reservations;
-    }
-}
-
-class BookingReportService {
-    public void displayAllBookings(List<Reservation> reservations) {
-        for (Reservation r : reservations) {
-            System.out.println(r.getReservationId() + " " + r.getGuestName() + " " + r.getRoomType() + " " + r.getPrice());
-        }
-    }
-
-    public void generateSummary(List<Reservation> reservations) {
-        int totalBookings = reservations.size();
-        double totalRevenue = 0;
-
-        for (Reservation r : reservations) {
-            totalRevenue += r.getPrice();
-        }
-
-        System.out.println("Total Bookings: " + totalBookings);
-        System.out.println("Total Revenue: " + totalRevenue);
     }
 }
 
 public class bookMyStayApp {
     public static void main(String[] args) {
 
-        BookingHistory history = new BookingHistory();
-        BookingReportService reportService = new BookingReportService();
+        int availableRooms = 1;
 
-        history.addReservation(new Reservation("R101", "Alice", "Deluxe", 2000));
-        history.addReservation(new Reservation("R102", "Bob", "Suite", 3500));
-        history.addReservation(new Reservation("R103", "Charlie", "Standard", 1500));
+        try {
+            BookingValidator.validate("Deluxe", availableRooms);
+            Reservation r1 = new Reservation("R201", "Deluxe");
+            availableRooms--;
 
-        List<Reservation> allReservations = history.getAllReservations();
+            System.out.println("Booking successful: " + r1.getReservationId());
 
-        reportService.displayAllBookings(allReservations);
-        reportService.generateSummary(allReservations);
+        } catch (InvalidBookingException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            BookingValidator.validate("Premium", availableRooms);
+            Reservation r2 = new Reservation("R202", "Premium");
+            availableRooms--;
+
+            System.out.println("Booking successful: " + r2.getReservationId());
+
+        } catch (InvalidBookingException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            BookingValidator.validate("Suite", availableRooms);
+            Reservation r3 = new Reservation("R203", "Suite");
+            availableRooms--;
+
+            System.out.println("Booking successful: " + r3.getReservationId());
+
+        } catch (InvalidBookingException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
